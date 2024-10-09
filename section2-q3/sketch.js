@@ -10,8 +10,6 @@ function setup() {
   stroke(255);
   strokeWeight(3);
 
-  const cx = width / 2; // 中心は (cx, cy)
-  const cy = height / 2;
   const maxR = min(width, height); // 大きさは幅と高さのうち小さい方
 
   drawCircle(black, maxR);
@@ -35,6 +33,8 @@ function drawArcs(c1, c2, r) {
     let start = TWO_PI / 20 * i;
     let stop = TWO_PI / 20 * (i + 1);
     fill(i % 2 == 0 ? c1 : c2);
+    const cx = width / 2; // 中心は (cx, cy)
+    const cy = height / 2;
     arc(cx, cy, r, r, start, stop, PIE);
   }
 }
