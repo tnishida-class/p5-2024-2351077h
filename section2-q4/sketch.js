@@ -3,7 +3,7 @@ function setup() {
   const blue = color(0, 51, 160);
   const white = color(255, 255, 255);
   createCanvas(270, 180);
-  // noStroke();
+  noStroke();
   background(255);
 
   let d = height / 9; // 縞1本の太さ
