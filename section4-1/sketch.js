@@ -61,6 +61,6 @@ function setup(){
   }
 
   stroke(0, 255, 0);
-  const ah = height * average/100
+  const ah =height * average / 100;
   line(0, height - ah, width, height-ah);// BLANK[5] 平均点の線を引きます
 }
