@@ -1,18 +1,29 @@
-// 最終課題を制作しよう
+//最終課題を制作しよう
 
 let cX, cY; 
+let balls;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cX = width / 2 - 20;
   cY = height / 4;
+  balls = [];
 }
+
 //画面サイズを変更すると黒目がずれてしまいます（アニメーションにより） 
-// rを押したら初期位置になりました
+//rを押したら初期位置になりました
 
 function draw() {
   background(220);
   
+  //背景ではじけるボール 
+  for(let i = 0; i < balls.length; i++){
+    let b = balls[i];
+    ellipse(b.x, b.y, b.size);
+    b.x += b.vx;
+    b.y += b.vy;
+  }
+
   //顔
   let X = width / 2;
   let Y = height / 2;
@@ -80,12 +91,23 @@ function draw() {
   let x1 = X - 100;
   line(x1, height * 2 / 3, x1 + 200, height * 2 / 3);
 
-  // ひげ
+  //ひげ
   let whiskerLength = 200;
   drawWhiskers(X, Y + 30, 500 / 2, whiskerLength);
 }
 
-// ひげオリジナル定義
+//ボールの定義
+function mouseDragged(){
+  const dx = mouseX - pmouseX;
+  const dy = mouseY - pmouseY;
+  i = random(20, 100);
+  if(mag(dx, dy) > 5){
+    const b = { x: mouseX, y: mouseY, size: i, vx: dx, vy: dy };
+    balls.push(b);
+  }
+}
+
+//ひげオリジナル定義
 function drawWhiskers(wX, wY, faceRadius, whiskerLength) {
   stroke(0);
   strokeWeight(2);
@@ -95,14 +117,14 @@ function drawWhiskers(wX, wY, faceRadius, whiskerLength) {
   }
 }
 
-// ひげ1本定義
+//ひげ1本定義
 function drawWhisker(x1, y1, angle, length) {
   let x2 = x1 + cos(angle) * length;
   let y2 = y1 + sin(angle) * length;
   line(x1, y1, x2, y2);
 }
 
-// 黒目ぎょろぎょろ
+//黒目飛び出る
 function keyPressed() {
   if (keyCode == LEFT_ARROW) { cX -= 7; } 
   else if (keyCode == RIGHT_ARROW) { cX += 7; }
@@ -113,7 +135,7 @@ function keyPressed() {
   else if (key == "r") { cX = width / 2 - 20, cY = height / 4; } 
 }
 
-// サイズ合わせ
+//サイズ合わせ
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
